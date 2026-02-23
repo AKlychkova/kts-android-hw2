@@ -18,13 +18,15 @@ fun App() {
     NavHost(navController, startDestination = Start) {
         composable<Start> {
             StartScreen(
-                onNavigateToLogin = {
+                onButtonClick = {
                     navController.navigate(route = Login)
                 }
             )
         }
         composable<Login> {
-            LoginScreen()
+            LoginScreen(
+                onLoginClick = { _, _ -> }
+            )
         }
     }
 }
