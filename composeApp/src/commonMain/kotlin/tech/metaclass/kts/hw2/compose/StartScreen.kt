@@ -20,12 +20,15 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import hw2_multiplatform.composeapp.generated.resources.Res
 import hw2_multiplatform.composeapp.generated.resources.compose_multiplatform
+import hw2_multiplatform.composeapp.generated.resources.go_button
+import hw2_multiplatform.composeapp.generated.resources.image_description
+import hw2_multiplatform.composeapp.generated.resources.welcome_text
 import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
+import tech.metaclass.kts.hw2.utils.Dimens
 
 @Composable
 fun StartScreen(
@@ -36,13 +39,13 @@ fun StartScreen(
             modifier = Modifier
                 .background(MaterialTheme.colorScheme.primaryContainer)
                 .fillMaxSize()
-                .padding(24.dp),
+                .padding(Dimens.gapMedium),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
             AsyncImage(
                 model = "https://cataas.com/cat/cute?width=400&height=400",
-                contentDescription = "Cute cat",
+                contentDescription = stringResource(Res.string.image_description),
                 modifier = Modifier
                     .fillMaxWidth()
                     .aspectRatio(1f)
@@ -50,20 +53,20 @@ fun StartScreen(
                 contentScale = ContentScale.Crop,
                 placeholder = painterResource(Res.drawable.compose_multiplatform)
             )
-            Spacer(modifier = Modifier.height(32.dp))
-            Text (
-                "Welcome!",
-                fontSize = 50.sp,
+            Spacer(modifier = Modifier.height(Dimens.gapLarge))
+            Text(
+                stringResource(Res.string.welcome_text),
+                fontSize = Dimens.fontLarge,
                 fontWeight = FontWeight.Bold
             )
-            Spacer(modifier = Modifier.height(32.dp))
+            Spacer(modifier = Modifier.height(Dimens.gapLarge))
             Button(
                 onClick = onButtonClick,
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Text(
-                    "Go!",
-                    fontSize = 30.sp
+                    stringResource(Res.string.go_button),
+                    fontSize = Dimens.fontMedium
                 )
             }
         }
@@ -72,6 +75,6 @@ fun StartScreen(
 
 @Composable
 @Preview
-fun StartScreenPreview() {
+private fun StartScreenPreview() {
     StartScreen {}
 }

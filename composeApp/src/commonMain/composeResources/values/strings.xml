@@ -1,0 +1,10 @@
+<resources>
+    <string name="hide_password_button">Hide</string>
+    <string name="show_password_button">Show</string>
+    <string name="password_hint">Password</string>
+    <string name="email_hint">Email</string>
+    <string name="login_button">Login</string>
+    <string name="go_button">Go!</string>
+    <string name="welcome_text">Welcome!</string>
+    <string name="image_description">Cute cat</string>
+</resources>

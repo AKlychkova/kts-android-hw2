@@ -7,6 +7,6 @@ import coil3.SingletonImageLoader
 
 class AndroidApp : Application(), SingletonImageLoader.Factory {
     override fun newImageLoader(context: PlatformContext): ImageLoader {
-        return createImageLoader(context);
+        return createImageLoader(context)
     }
 }

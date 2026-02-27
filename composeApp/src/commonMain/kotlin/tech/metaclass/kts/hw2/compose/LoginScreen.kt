@@ -16,7 +16,6 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -25,7 +24,14 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
+import hw2_multiplatform.composeapp.generated.resources.Res
+import hw2_multiplatform.composeapp.generated.resources.email_hint
+import hw2_multiplatform.composeapp.generated.resources.hide_password_button
+import hw2_multiplatform.composeapp.generated.resources.login_button
+import hw2_multiplatform.composeapp.generated.resources.password_hint
+import hw2_multiplatform.composeapp.generated.resources.show_password_button
+import org.jetbrains.compose.resources.stringResource
+import tech.metaclass.kts.hw2.utils.Dimens
 
 
 @Composable
@@ -41,13 +47,13 @@ fun LoginScreen(
             modifier = Modifier
                 .background(MaterialTheme.colorScheme.primaryContainer)
                 .fillMaxSize()
-                .padding(24.dp),
+                .padding(Dimens.padding),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             OutlinedTextField(
                 value = email,
                 onValueChange = { email = it },
-                label = { Text("Email") },
+                label = { Text(stringResource(Res.string.email_hint)) },
                 singleLine = true,
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Email
@@ -55,36 +61,43 @@ fun LoginScreen(
                 modifier = Modifier.fillMaxWidth()
             )
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(Dimens.gapSmall))
 
             OutlinedTextField(
                 value = password,
                 onValueChange = { password = it },
-                label = { Text("Password") },
+                label = { Text(stringResource(Res.string.password_hint)) },
                 singleLine = true,
-                visualTransformation = if (passwordVisible)
+                visualTransformation = if (passwordVisible) {
                     VisualTransformation.None
-                else
-                    PasswordVisualTransformation(),
+                } else {
+                    PasswordVisualTransformation()
+                },
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Password
                 ),
                 trailingIcon = {
                     TextButton(onClick = { passwordVisible = !passwordVisible }) {
-                        Text(if (passwordVisible) "Hide" else "Show")
+                        Text(
+                            if (passwordVisible) {
+                                stringResource(Res.string.hide_password_button)
+                            } else {
+                                stringResource(Res.string.show_password_button)
+                            }
+                        )
                     }
                 },
                 modifier = Modifier.fillMaxWidth()
             )
 
-            Spacer(modifier = Modifier.height(24.dp))
+            Spacer(modifier = Modifier.height(Dimens.gapMedium))
 
             Button(
                 onClick = { onLoginClick(email, password) },
                 modifier = Modifier.fillMaxWidth(),
                 enabled = email.isNotBlank() && password.isNotBlank()
             ) {
-                Text("Login")
+                Text(stringResource(Res.string.login_button))
             }
         }
     }
@@ -92,6 +105,6 @@ fun LoginScreen(
 
 @Composable
 @Preview
-fun LoginScreenPreview() {
-    LoginScreen { _, _ ->  }
+private fun LoginScreenPreview() {
+    LoginScreen { _, _ -> }
 }
